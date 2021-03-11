@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Searches</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style type="text/css">
+      #map {
+        height: 100%;
+      }
+
+      html,
+      body {
+        height: 400px;
+        width: 700px;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      var map;
+      var service;
+      var infowindow;
+
+      function initMap() {
+        var pyrmont = new google.maps.LatLng(-33.8665433, 151.1956316);
+
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: pyrmont,
+          zoom: 15,
+        });
+
+        ///////////////////////////////////////vvvvvvvvvvv
+        var request = {
+          location: pyrmont,
+          radius: "500",
+          type: ["restaurant"],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, callback);
+
+        /////////////////////////////////////////^^^^^
+      }
+
+      ////////////////////////////////////////////vvvvv
+
+      function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        if (!place.geometry || !place.geometry.location) return;
+        const marker = new google.maps.Marker({
+          map,
+          position: place.geometry.location,
+        });
+        google.maps.event.addListener(marker, "click", () => {
+          infowindow.setContent(place.name || "");
+          infowindow.open(map);
+        });
+      }
+
+      //////////////////////////////////////////^^^^^^
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <form>
+      <input
+        type="text"
+        name="starting"
+        id="starting"
+        class="form-control mb-3"
+        placeholder="Starting Location"
+      />
+      <input
+        type="text"
+        name="destination"
+        id="destination"
+        class="form-control mb-3"
+        placeholder="Destination"
+      />
+
+      <label for="key_words"> Choose key words </label>
+
+      <br /><br />
+
+      <label><input type="checkbox" name="test" value="1" />food</label>
+      <label><input type="checkbox" name="test" value="2" /> view point </label>
+      <label><input type="checkbox" name="test" value="3" /> hike </label>
+      <label><input type="checkbox" name="test" value="4" /> thrift </label>
+      <label><input type="checkbox" name="test" value="5" /> beauty </label>
+      <label><input type="checkbox" name="test" value="6" /> grocery </label>
+      <label><input type="checkbox" name="test" value="7" /> gas </label>
+      <label><input type="checkbox" name="test" value="8" /> historical </label>
+      <label><input type="checkbox" name="test" value="9" /> bar </label>
+      <label><input type="checkbox" name="test" value="10" /> bewery </label>
+      <label><input type="checkbox" name="test" value="11" /> local </label>
+      <label><input type="checkbox" name="test" value="12" /> park </label>
+
+      <br /><br />
+
+      <input type="submit" class="btn btn-primary mb-3 float-end" />
+    </form>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaq7utmRxXKf2os3_Y5ILDOLGnG7u5B2A&callback=initMap&libraries=places&v=weekly"
+      async
+    ></script>
+  </body>
+</html>
+
+<!--<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <script
+      type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAq0loDzGWU5PB3UFAkk3O9SFagGIKutMU"
+    ></script>
+
+    <script>
+      var map;
+
+      function initalize() {
+        var center = new google.maps.LatLng(37.422, -122.084058);
+        map = new gogle.maps.Map(document.getElementById("map"), {
+          center: center,
+          zoon: 13,
+        });
+
+        var request = {
+          location: center,
+          radius: 8047,
+          types: ["cafe"],
+        };
+
+        google.maps.event.addDomListener(window, "load", initalize);
+
+        service.nearbySearch(request, callback);
+      }
+
+      function callback(results, status) {
+        if (status == google.maps.places.PlaceServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <h1>hiii</h1>
+  </body>
+</html>
+-->
