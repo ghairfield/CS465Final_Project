@@ -14,16 +14,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="javascripts/maps.js"></script>
   </head>
-  <body class="bg-dark text-light">
+  <body id="body">
+    <div id="header"><string>Joi Ride</string></div>
     <div class="container">
-      <br /><br /><br />
+      <br /><br />
 
       <div class="row">
         <!-- Map container -->
-        <div id="map1" class="col-sm"></div>
+
         <div id="map" class="col-sm"></div>
-        <div class="col-sm">
+        <div id="info_container" class="col-sm rounded">
+          <br /><br />
           <form>
+            <text id="prompt">
+              Please enter a starting Point and destination to get direction :
+            </text>
+            <br />
+            <text id="prompt">
+              (if stating address is current location, it can be omitted)
+            </text>
+
+            <br /><br />
+
             <input
               type="text"
               name="starting"
@@ -39,16 +51,23 @@
               placeholder="Destination"
             />
 
-            <input type="submit" class="btn btn-primary mb-3 float-end" />
+            <input
+              id="submit"
+              type="submit"
+              class="btn btn-primary mb-3 float-end"
+            />
 
             <br /><br />
 
-            <text>
-              *** Please select the following BEFORE creating a way marker
-              ***</text
-            >
+            <text id="prompt">
+              **** Please select the following BEFORE creating a way marker ****
+            </text>
 
-            <br />
+            <br /><br />
+
+            <text id="prompt"> Select the search radius: </text>
+
+            <br /><br />
 
             <select type="radius_options" name="num_stops" id="radius_options">
               <lable> Please select the search radius</lable>
@@ -60,7 +79,7 @@
 
             <br /><br />
 
-            <label for="key_words"> Choose key words : </label>
+            <label for="key_words" id="prompt"> Choose key words : </label>
 
             <br /><br />
 
@@ -202,6 +221,7 @@
           <button type="button" id="addmarker" class="btn btn-info">
             Add waypoint
           </button>
+          <br /><br />
         </div>
       </div>
 
