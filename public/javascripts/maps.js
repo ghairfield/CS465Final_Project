@@ -5,8 +5,10 @@ let autoCompleteDestination;
 let autoCompleteSource;
 let directionService;
 let directionRenderer;
+let service;
 let markers = [];
 let infowindow;
+let currentInfoWindow;
 let currentLocation = {
   center: {
     lat: 45.5112,
@@ -31,6 +33,9 @@ initMap = () => {
   directionRenderer.setPanel(document.getElementById("directionPanel"));
   directionRenderer.setMap(map);
   infowindow = new google.maps.InfoWindow();
+
+  infoPane = document.getElementById("panel");
+
   /* Get the user's current location */
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -99,7 +104,7 @@ $(document).ready(function () {
         type: [val],
       };
 
-      let service = new google.maps.places.PlacesService(map);
+      service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request, servicesCallBack);
       infowindow = new google.maps.InfoWindow();
     });
@@ -124,9 +129,85 @@ $(document).ready(function () {
     const marker = new google.maps.Marker({
       map,
       position: place.geometry.location,
+      title: place.name,
     });
     google.maps.event.addListener(marker, "click", () => {
-      infowindow.open(map, marker);
+      let request = {
+        placeId: place.place_id,
+        fields: [
+          "name",
+          "formatted_address",
+          "geometry",
+          "rating",
+          "website",
+          "photos",
+        ],
+      };
+      service.getDetails(request, (placeResult, status) => {
+        showDetails(placeResult, marker, status);
+      });
     });
+  }
+
+  function showDetails(placeResult, marker, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      let placeInfowindow = new google.maps.InfoWindow();
+      placeInfowindow.setContent(
+        "<div><strong>" +
+          placeResult.name +
+          "</strong><br>" +
+          "Rating: " +
+          placeResult.rating +
+          "</div>"
+      );
+      placeInfowindow.open(marker.map, marker);
+
+      showPanel(placeResult);
+    } else {
+      console.log("showDetails failed: " + status);
+    }
+  }
+
+  function showPanel(placeResult) {
+    // If infoPane is already open, close it
+    /*  if (infoPane.classList.contains("open")) {
+      infoPane.classList.remove("open");
+    }*/
+
+    // Clear the previous details
+    /* if (infoPane.lastChild) {
+      while (infoPane.lastChild) {
+        infoPane.removeChild(infoPane.lastChild);
+      }
+    }*/
+
+
+    let name = document.createElement("h1");
+    name.classList.add("place");
+    name.textContent = placeResult.name;
+    //infoPane.appendChild(name);
+    if (placeResult.rating != null) {
+      let rating = document.createElement("p");
+      rating.classList.add("details");
+      rating.textContent = `Rating: ${placeResult.rating} \u272e`;
+      //infoPane.appendChild(rating);
+    }
+    let address = document.createElement("p");
+    address.classList.add("details");
+    address.textContent = placeResult.formatted_address;
+    //infoPane.appendChild(address);
+    if (placeResult.website) {
+      let websitePara = document.createElement("p");
+      let websiteLink = document.createElement("a");
+      let websiteUrl = document.createTextNode(placeResult.website);
+      websiteLink.appendChild(websiteUrl);
+      websiteLink.title = placeResult.website;
+      websiteLink.href = placeResult.website;
+      websitePara.appendChild(websiteLink);
+      //infoPane.appendChild(websitePara);
+    }
+
+    // Open the infoPane
+    //infoPane.classList.add("open");
   }
 });

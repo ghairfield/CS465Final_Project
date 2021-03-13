@@ -11,11 +11,12 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="javascripts/maps.js"></script>
   </head>
   <body id="body">
-    <div id="header"><string>Joi Ride</string></div>
+    <div id="header"><strong>Joi Ride</strong></div>
     <div class="container">
       <br /><br />
 
@@ -23,15 +24,20 @@
         <!-- Map container -->
 
         <div id="map" class="col-sm"></div>
+        <!--<div id="panel"></div> -->
         <div id="info_container" class="col-sm rounded">
           <br /><br />
           <form>
             <text id="prompt">
-              Please enter a starting Point and destination to get direction :
+              <strong>
+                Please enter a starting Point and destination to get direction :
+              </strong>
             </text>
             <br />
-            <text id="prompt">
-              (if stating address is current location, it can be omitted)
+            <text id="prompt"
+              ><strong>
+                (if stating address is current location, it can be omitted)
+              </strong>
             </text>
 
             <br /><br />
@@ -59,13 +65,18 @@
 
             <br /><br />
 
-            <text id="prompt">
-              **** Please select the following BEFORE creating a way marker ****
+            <text id="prompt"
+              ><strong>
+                **** Please select the following BEFORE creating a waymarker
+                ****
+              </strong>
             </text>
 
             <br /><br />
 
-            <text id="prompt"> Select the search radius: </text>
+            <text id="prompt"
+              ><strong> Select the search radius: </strong>
+            </text>
 
             <br /><br />
 
@@ -79,7 +90,9 @@
 
             <br /><br />
 
-            <label for="key_words" id="prompt"> Choose key words : </label>
+            <label for="key_words" id="prompt"
+              ><strong>Choose key words :</strong>
+            </label>
 
             <br /><br />
 
