@@ -39,42 +39,164 @@
               placeholder="Destination"
             />
 
-            <label for="key_words"> Choose key words </label>
-
-            <br /><br />
-
-            <label><input type="checkbox" name="test" value="restaurant" /> food </label>
-            <label
-              ><input type="checkbox" name="test" value="lodging" /> Hotel
-            </label>
-            <label><input type="checkbox" name="test" value="park" /> park </label>
-            <label
-              ><input type="checkbox" name="test" value="4" /> thrift
-            </label>
-            <label
-              ><input type="checkbox" name="test" value="5" /> beauty
-            </label>
-            <label
-              ><input type="checkbox" name="test" value="6" /> grocery
-            </label>
-            <label><input type="checkbox" name="test" value="gas_station" /> gas </label>
-            <label
-              ><input type="checkbox" name="test" value="8" /> historical
-            </label>
-            <label><input type="checkbox" name="test" value="bar" /> bar </label>
-            <label
-              ><input type="checkbox" name="test" value="10" /> bewery
-            </label>
-            <label
-              ><input type="checkbox" name="test" value="11" /> local
-            </label>
-            <label
-              ><input type="checkbox" name="test" value="12" /> park
-            </label>
-
-            <br /><br />
-
             <input type="submit" class="btn btn-primary mb-3 float-end" />
+
+            <br /><br />
+
+            <text>
+              *** Please select the following BEFORE creating a way marker
+              ***</text
+            >
+
+            <br />
+
+            <select type="radius_options" name="num_stops" id="radius_options">
+              <lable> Please select the search radius</lable>
+              <option value="8047">5 miles</option>
+              <option value="16093">10 miles</option>
+              <option value="24140">15 miles</option>
+              <option value="32187">20 miles</option>
+            </select>
+
+            <br /><br />
+
+            <label for="key_words"> Choose key words : </label>
+
+            <br /><br />
+
+            <label
+              ><input
+                type="checkbox"
+                name="test[1][]"
+                id="required"
+                value="restaurant"
+              />
+              Food
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                name="test[1][]"
+                id="required"
+                value="lodging"
+              />
+              Hotel
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="park"
+              />
+              Park
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="art-gallery"
+              />
+              Art Gallery
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="cafe"
+              />
+              Cafe
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="campground"
+              />
+              Campground
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="gas_station"
+              />
+              Gas
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="8"
+              />
+              historical
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="bar"
+              />
+              Bar
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="museum"
+              />
+              Museum
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                class="radio"
+                name="test[1][]"
+                id="required"
+                value="movie_theater"
+              />
+              Movie Theater
+            </label>
+            <label
+              ><input
+                type="checkbox"
+                name="test[1][]"
+                id="required"
+                value="tourist_attraction"
+              />
+              Tourist Attraction
+            </label>
+
+            <script>
+              $("input:checkbox").on("click", function () {
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                  var group =
+                    "input:checkbox[name='" + $box.attr("name") + "']";
+                  $(group).prop("checked", false);
+                  $box.prop("checked", true);
+                } else {
+                  $box.prop("checked", false);
+                }
+              });
+            </script>
+
+            <br /><br />
           </form>
 
           <button type="button" id="addmarker" class="btn btn-info">

@@ -75,6 +75,7 @@ $(document).ready(function () {
       }
     });
   });
+
   $("#addmarker").click(function () {
     console.log("Marker requested");
     let marker = new google.maps.Marker({
@@ -84,17 +85,30 @@ $(document).ready(function () {
       draggable: true,
       icon: { url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" },
     });
+
+    var val = $("input[type=checkbox][clicked=true]").val();
+    console.log("value : " + val);
+
+    var radius_var = $("#radius_options").val();
+    console.log("radius : " + radius_var);
+
     google.maps.event.addListener(marker, "dragend", function (event) {
       let request = {
         location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
-        radius: "500",
-        type: ["restaurant"],
+        radius: radius_var,
+        type: [val],
       };
+
       let service = new google.maps.places.PlacesService(map);
       service.nearbySearch(request, servicesCallBack);
       infowindow = new google.maps.InfoWindow();
     });
     markers.push(marker);
+  });
+
+  $("form input[type=checkbox]").click(function () {
+    $("input[type=checkbox]", $(this).parents("form")).removeAttr("clicked");
+    $(this).attr("clicked", "true");
   });
 
   function servicesCallBack(results, status) {
