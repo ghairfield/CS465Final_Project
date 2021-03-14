@@ -23,6 +23,7 @@ let destination = {
   },
   zoom: 12,
 };
+
 initMap = () => {
   if (google.maps) mapsRendered = true;
   // Map object
@@ -62,6 +63,7 @@ initMap = () => {
     mapsRendered = true;
   }
 };
+
 $(document).ready(function () {
   $("form").submit(function (event) {
     let str = $("#destination").val();
@@ -71,6 +73,7 @@ $(document).ready(function () {
       destination: str,
       travelMode: "DRIVING",
     };
+
     directionService.route(request, function (result, status) {
       if (status === "OK") {
         directionRenderer.setDirections(result);
@@ -81,6 +84,7 @@ $(document).ready(function () {
     });
   });
 
+  //on click - for way marker
   $("#addmarker").click(function () {
     console.log("Marker requested");
     let marker = new google.maps.Marker({
@@ -91,12 +95,15 @@ $(document).ready(function () {
       icon: { url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" },
     });
 
+    //get value from checkbox
     var val = $("input[type=checkbox][clicked=true]").val();
     console.log("value : " + val);
 
+    //get radius value
     var radius_var = $("#radius_options").val();
     console.log("radius : " + radius_var);
 
+    //nearby search request
     google.maps.event.addListener(marker, "dragend", function (event) {
       let request = {
         location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
@@ -108,6 +115,7 @@ $(document).ready(function () {
       service.nearbySearch(request, servicesCallBack);
       infowindow = new google.maps.InfoWindow();
     });
+
     markers.push(marker);
   });
 
@@ -116,14 +124,17 @@ $(document).ready(function () {
     $(this).attr("clicked", "true");
   });
 
+  // call create marker for each search result
   function servicesCallBack(results, status) {
-    console.log("in here");
+    console.log("in services callback");
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       for (var i = 0; i < results.length; ++i) {
         createMarker(results[i]);
       }
     }
   }
+
+  //create marker for each search result
   function createMarker(place) {
     if (!place.geometry || !place.geometry.location) return;
     const marker = new google.maps.Marker({
@@ -131,6 +142,7 @@ $(document).ready(function () {
       position: place.geometry.location,
       title: place.name,
     });
+
     google.maps.event.addListener(marker, "click", () => {
       let request = {
         placeId: place.place_id,
@@ -168,6 +180,9 @@ $(document).ready(function () {
     }
   }
 
+  //function not working- supposed to display a pannel showing
+  //information for each search result information
+
   function showPanel(placeResult) {
     // If infoPane is already open, close it
     /*  if (infoPane.classList.contains("open")) {
@@ -180,7 +195,6 @@ $(document).ready(function () {
         infoPane.removeChild(infoPane.lastChild);
       }
     }*/
-
 
     let name = document.createElement("h1");
     name.classList.add("place");
