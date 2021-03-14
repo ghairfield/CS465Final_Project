@@ -17,11 +17,74 @@
   color: white;
 }
 
+#background_box {
+  background-color: rgb(6, 129, 129);
+  border-radius: 25px;
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-indent: 30px;
+}
+
+#how_to_box {
+  background-color: rgb(6, 129, 129);
+  border-radius: 25px;
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-indent: 20px;
+}
+
+#image {
+  display: center;
+  align-items: center;
+}
+
+img {
+  border-radius: 25px;
+  width: 1150px;
+  height: 800px;
+}
+
+@media screen and (max-width: 480px) {
+  img {
+    width: 400px;
+  }
+}
+
 #header {
   color: white;
   font-size: 80px;
   padding: 20px;
   margin-left: 100px;
+}
+
+#sub_header {
+  color: white;
+  font-size: 30px;
+  padding-top: 20px;
+  margin-left: 150px;
+}
+
+#material-icons {
+  color: rgb(250, 144, 83);
+  top: 20px;
+  right: 55px;
+  position: fixed;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+#navbar_logo {
+  text-decoration-color: none;
+  color: rgb(250, 144, 83);
+  top: 70px;
+  right: 35px;
+  position: fixed;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 25px;
 }
 
 #prompt {
