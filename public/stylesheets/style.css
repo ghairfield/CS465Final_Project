@@ -1,3 +1,6 @@
+/*Style sheet used for index.ejs + about.ejs*/
+
+/*map style*/
 #map {
   height: 400px;
   width: 1000px;
@@ -7,16 +10,19 @@
   margin-right: 100px;
 }
 
+/*main body of webpage*/
 #body {
   background-color: rgb(36, 167, 167);
 }
 
+/*column with form information*/
 #info_container {
   background-color: rgb(6, 129, 129);
   border-radius: 25px;
   color: white;
 }
 
+/*background info on about*/
 #background_box {
   background-color: rgb(6, 129, 129);
   border-radius: 25px;
@@ -26,6 +32,8 @@
   text-indent: 30px;
 }
 
+
+/*how to on about page*/
 #how_to_box {
   background-color: rgb(6, 129, 129);
   border-radius: 25px;
@@ -35,23 +43,28 @@
   text-indent: 20px;
 }
 
+/*image on about*/
 #image {
   display: center;
   align-items: center;
 }
 
+
+/*img styling*/
 img {
   border-radius: 25px;
   width: 1150px;
   height: 800px;
 }
 
+/*img styling on smaller screen*/
 @media screen and (max-width: 480px) {
   img {
     width: 400px;
   }
 }
 
+/*header containing title*/
 #header {
   color: white;
   font-size: 80px;
@@ -59,6 +72,7 @@ img {
   margin-left: 100px;
 }
 
+/*subtitle styling*/
 #sub_header {
   color: white;
   font-size: 30px;
@@ -66,6 +80,7 @@ img {
   margin-left: 150px;
 }
 
+/*logo links to about - home*/
 #material-icons {
   color: rgb(250, 144, 83);
   top: 20px;
@@ -76,6 +91,7 @@ img {
   font-size: 50px;
 }
 
+/*container holding about + home logo*/
 #navbar_logo {
   text-decoration-color: none;
   color: rgb(250, 144, 83);
@@ -87,16 +103,19 @@ img {
   font-size: 25px;
 }
 
+/*prompt in form in home*/
 #prompt {
   color: rgb(252, 198, 137);
 }
 
+/*Styling for submit button on form*/
 #submit {
   background-color: rgb(250, 144, 83);
   outline: 0;
   border: none;
 }
 
+/*styling for waypoint button on form*/
 #addmarker {
   background-color: rgb(250, 144, 83);
   color: white;
@@ -104,6 +123,7 @@ img {
   border: none;
 }
 
+/*Spanel for info window*/
 #panel {
   height: 30%;
   width: 30%;
@@ -114,10 +134,12 @@ img {
   transition: all 0.2s ease-out;
 }
 
+/*open on click*/
 .open {
   width: 250px;
 }
 
+/* positioning in panel*/
 .hero {
   width: 100%;
   height: auto;
@@ -125,6 +147,7 @@ img {
   display: block;
 }
 
+/*styling for place details*/
 .place,
 p {
   font-family: "open sans", arial, sans-serif;
@@ -132,10 +155,12 @@ p {
   padding-right: 18px;
 }
 
+/*description in panel*/
 .details {
   color: darkslategrey;
 }
 
+/*details in panel*/
 a {
   text-decoration: none;
   color: cadetblue;
